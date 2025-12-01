@@ -1,0 +1,162 @@
+/*Layout geral*/
+
+:host {
+  display: block;
+  max-width: 900px;
+  margin: 20px auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*Títulos*/
+h1 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 20px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+
+h2+p {
+  margin: 2px 0;
+}
+
+/*Formulário*/
+
+form {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f8f8f8;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input,
+form select {
+  padding: 6px;
+  width: 260px;
+  margin-top: 5px;
+}
+
+form button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background-color: #555;
+  color: #fff;
+}
+
+form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/*Tabelas*/
+
+table {
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+table th {
+  background-color: #eaeaea;
+  font-weight: bold;
+}
+
+table button {
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #b22222;
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.no-data {
+  margin-top: 10px;
+  font-style: italic;
+  color: #666;
+}
+
+.erro-msg {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.valor-entrada {
+  color: green;
+  font-weight: bold;
+}
+
+.valor-saida {
+  color: red;
+  font-weight: bold;
+}
+
+/*FIltro*/
+
+.filtro-container {
+  margin: 20px 0;
+}
+
+.filtro-label {
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.filtro-input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+}
+
+.filtro-input {
+  flex: 1;
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.filtro-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 3px rgba(74, 144, 226, 0.4);
+}
+
+.filtro-clear {
+  padding: 6px 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  border: 1px solid #999;
+  background-color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.filtro-clear:hover {
+  background-color: #f2f2f2;
+}

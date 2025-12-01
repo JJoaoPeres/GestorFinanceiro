@@ -1,0 +1,161 @@
+<h1>Controle Financeiro</h1>
+
+<!-- Mensagem de erro -->
+@if (erro) {
+<div style="color: red; margin-bottom: 10px;">
+  {{ erro }}
+</div>
+}
+
+<!-- FORMULÁRIO -->
+<form (ngSubmit)="criar()">
+
+  <label>Tipo:</label>
+  <br>
+  <select [(ngModel)]="type" name="type" required>
+    <option value="">Selecione</option>
+    <option value="income">Entrada</option>
+    <option value="expense">Saída</option>
+  </select>
+
+  <br><br>
+
+  <label>Categoria:</label>
+  <br>
+  <input type="text" [(ngModel)]="category" name="category" required>
+
+  <br><br>
+
+  <label>Valor:</label>
+  <br>
+  <input type="number" [(ngModel)]="value" name="value" required>
+
+  <br><br>
+
+  <label>Data:</label>
+  <br>
+  <input type="date" [(ngModel)]="date" name="date" required>
+
+  <br><br>
+
+  <label>Descrição:</label>
+  <br>
+  <input type="text" [(ngModel)]="description" name="description">
+
+  <br><br>
+
+  <button type="submit" [disabled]="salvando">
+    {{ salvando ? 'Salvando...' : 'Salvar' }}
+  </button>
+
+</form>
+
+<hr>
+
+<!-- RESUMO / SALDO -->
+<h2>Resumo Financeiro</h2>
+
+<p><strong>Total de Entradas:</strong>
+  <span style="color:green;">
+    R$ {{ totalEntradas }}
+  </span>
+</p>
+
+<p><strong>Total de Saídas:</strong>
+  <span style="color:red;">
+    R$ {{ totalSaidas }}
+  </span>
+</p>
+
+<p><strong>Saldo:</strong>
+  <span [style.color]="saldo >= 0 ? 'green' : 'red'">
+    R$ {{ saldo }}
+  </span>
+</p>
+
+<hr>
+
+<!-- LOADING -->
+@if (carregando) {
+<div>Carregando transações...</div>
+}
+
+<div class="filtro-container">
+  <label class="filtro-label">Filtrar por categoria</label>
+
+  <div class="filtro-input-wrapper">
+    <input type="text" [(ngModel)]="filtroCategoria" class="filtro-input" placeholder="Digite uma categoria…" />
+
+    @if (filtroCategoria) {
+    <button type="button" class="filtro-clear" (click)="filtroCategoria = ''">
+      Limpar
+    </button>
+    }
+  </div>
+</div>
+
+
+
+<!-- LISTA DE ENTRADAS -->
+<h2>Entradas</h2>
+
+@if (!carregando && entradasFiltradas.length > 0) {
+<table width="100%">
+  <tr>
+    <th>Categoria</th>
+    <th>Valor</th>
+    <th>Data</th>
+    <th>Descrição</th>
+    <th>Ações</th>
+  </tr>
+
+  @for (t of entradasFiltradas; track t._id) {
+  <tr>
+    <td>{{ t.category }}</td>
+    <td class="valor-entrada">+ R$ {{ t.value }}</td>
+    <td>{{ t.date | date:'dd/MM/yyyy' }}</td>
+    <td>{{ t.description }}</td>
+    <td>
+      <button (click)="excluir(t._id)">Excluir</button>
+    </td>
+  </tr>
+  }
+</table>
+}
+
+@if (!carregando && entradasFiltradas.length === 0) {
+<div class="no-data">Nenhuma entrada cadastrada.</div>
+}
+
+<hr>
+
+<!-- LISTA DE SAÍDAS -->
+<h2>Saídas</h2>
+
+@if (!carregando && saidasFiltradas.length > 0) {
+<table width="100%">
+  <tr>
+    <th>Categoria</th>
+    <th>Valor</th>
+    <th>Data</th>
+    <th>Descrição</th>
+    <th>Ações</th>
+  </tr>
+
+  @for (t of saidasFiltradas; track t._id) {
+  <tr>
+    <td>{{ t.category }}</td>
+    <td class="valor-saida">- R$ {{ t.value }}</td>
+    <td>{{ t.date | date:'dd/MM/yyyy' }}</td>
+    <td>{{ t.description }}</td>
+    <td>
+      <button (click)="excluir(t._id)">Excluir</button>
+    </td>
+  </tr>
+  }
+</table>
+}
+
+@if (!carregando && saidasFiltradas.length === 0) {
+<div class="no-data">Nenhuma saída cadastrada.</div>
+}
