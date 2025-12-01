@@ -58,7 +58,7 @@ export class Transacoes implements OnInit {
       return;
     }
 
-    //objeto completo no formato da interface Transacao antes de enviar para o backend.
+    
     const transacao: Transacao = {
       type: this.type,
       category: this.category,  
