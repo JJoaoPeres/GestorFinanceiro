@@ -49,10 +49,10 @@ const transacaoSchema = new mongoose.Schema({
 
 const Transacao = mongoose.model('Transacao', transacaoSchema, 'Transacoes');
 
-// Rota inicial
+
 app.get('/', (req, res) => res.json({ msg: 'API financeira rodando' }));
 
-// Criar transação (entrada ou saída)
+
 app.post('/transacoes', async (req, res) => {
   try {
     const transacao = await Transacao.create(req.body);
@@ -62,7 +62,7 @@ app.post('/transacoes', async (req, res) => {
   }
 });
 
-// Listar todas as transações
+
 app.get('/transacoes', async (req, res) => {
   try {
     const transacoes = await Transacao.find().sort({ createdAt: -1 });
@@ -72,7 +72,7 @@ app.get('/transacoes', async (req, res) => {
   }
 });
 
-// Buscar transação por ID
+
 app.get('/transacoes/:id', async (req, res) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
@@ -86,7 +86,7 @@ app.get('/transacoes/:id', async (req, res) => {
   }
 });
 
-// Atualizar transação (PUT = substitui tudo)
+
 app.put('/transacoes/:id', async (req, res) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
@@ -104,7 +104,7 @@ app.put('/transacoes/:id', async (req, res) => {
   }
 });
 
-// Atualizar parcialmente transação (PATCH)
+
 app.patch('/transacoes/:id', async (req, res) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
@@ -122,7 +122,7 @@ app.patch('/transacoes/:id', async (req, res) => {
   }
 });
 
-// Deletar transação
+
 app.delete('/transacoes/:id', async (req, res) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
@@ -136,7 +136,7 @@ app.delete('/transacoes/:id', async (req, res) => {
   }
 });
 
-// Iniciar servidor
+
 app.listen(process.env.PORT, () =>
   console.log(`Servidor rodando em http://localhost:${process.env.PORT}`)
 );
